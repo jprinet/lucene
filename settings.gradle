@@ -22,6 +22,11 @@ pluginManagement {
     }
 }
 
+plugins {
+    id 'com.gradle.enterprise' version '3.7'
+    id 'com.gradle.common-custom-user-data-gradle-plugin' version '1.4.2'
+}
+
 rootProject.name = "lucene-root"
 
 includeBuild("dev-tools/missing-doclet")
@@ -61,3 +66,23 @@ include "lucene:suggest"
 include "lucene:test-framework"
 include "lucene:documentation"
 include "lucene:distribution"
+
+gradleEnterprise {
+    server = "$geServer"
+    accessKey = "$geAccessKey"
+    allowUntrustedServer = true
+    buildScan {
+        publishAlways()
+
+        uploadInBackground = System.getenv('CI') == null
+
+        capture {
+            taskInputFiles = true
+        }
+
+        buildCache {
+            local { enabled = true }
+            remote(HttpBuildCache) { enabled = false }
+        }
+    }
+}
