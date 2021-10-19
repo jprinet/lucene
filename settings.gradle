@@ -67,6 +67,8 @@ include "lucene:test-framework"
 include "lucene:documentation"
 include "lucene:distribution"
 
+def isCI = (System.getenv('CI') != null)
+
 gradleEnterprise {
     server = "$geServer"
     accessKey = "$geAccessKey"
@@ -74,15 +76,20 @@ gradleEnterprise {
     buildScan {
         publishAlways()
 
-        uploadInBackground = System.getenv('CI') == null
+        uploadInBackground = !isCI
 
         capture {
             taskInputFiles = true
         }
+    }
+}
 
-        buildCache {
-            local { enabled = true }
-            remote(HttpBuildCache) { enabled = false }
-        }
+buildCache {
+    local { enabled = false }
+    remote(HttpBuildCache) {
+        enabled = true
+        push = isCI
+        url = "$geServer/cache/"
+        allowUntrustedServer = true
     }
 }
