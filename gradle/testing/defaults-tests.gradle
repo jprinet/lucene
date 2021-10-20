@@ -45,6 +45,13 @@ class TestEnvironmentProvider implements CommandLineArgumentProvider {
 }
 
 allprojects {
+
+  normalization {
+    runtimeClasspath {
+      ignore 'MANIFEST.MF'
+    }
+  }
+
   plugins.withType(JavaPlugin) {
     project.ext {
       // This array will collect all test options, including default values and option description.
@@ -192,6 +199,13 @@ allprojects {
       doFirst {
         // Print some diagnostics about locations used.
         logger.info("Test folders for {}: cwd={}, tmp={}", project.path, testsCwd, testsTmpDir)
+
+
+        tasks.withType(Test).configureEach { task ->
+          task.systemProperties.forEach { k,v ->
+            buildScan.value "test#TaskSystemProperties#" + k.toString(), v.toString()
+          }
+        }
       }
     }
   }

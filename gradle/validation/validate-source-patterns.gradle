@@ -219,6 +219,8 @@ class ValidateSourcePatternsTask extends DefaultTask {
     ProgressLogger progress = progressLoggerFactory.newOperation(this.class)
     progress.start(this.name, this.name)
 
+    println sourceFiles
+
     sourceFiles.each{ f ->
       progress.progress("Scanning ${f.name}")
       logger.debug('Scanning source file: {}', f);
