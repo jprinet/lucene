@@ -71,7 +71,7 @@ subprojects {
       extensions.each{
         include "**/*.${it}"
         exclude '**/.gradle/**', '.idea/**'
-      }
+      }.sort()
 
       // Don't go into child projects (scanned separately).
       childProjects.keySet().each{
@@ -113,7 +113,7 @@ configure(rootProject) {
       extensions.each{
         include "**/*.${it}"
         exclude '**/.gradle/**', '.idea/**'
-      }
+      }.sort()
 
       // Don't go into child projects (scanned separately).
       childProjects.keySet().each{
