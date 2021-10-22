@@ -147,6 +147,7 @@ class ValidateSourcePatternsTask extends DefaultTask {
 
   @TaskAction
   public void check() {
+    def toto = false
     def invalidPatterns = [
       (~$/@author\b/$) : '@author javadoc tag',
       (~$/(?i)\bno(n|)commit\b/$) : 'nocommit',
