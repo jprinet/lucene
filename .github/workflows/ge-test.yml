@@ -27,4 +27,4 @@ jobs:
             - name: Initialize gradle settings
               run: ./gradlew localSettings --build-cache -Dscan.tag.exp4 -PgeServer=${{ secrets.GESERVER }} -PgeAccessKey=${{ secrets.GEACCESSKEY }} --info
             - name: Run regular and regression tests
-              run: ./gradlew -p lucene/analysis/common clean check testRegressions --build-cache -Dscan.tag.exp5 -Ptests.seed=deadbeef -PgeServer=${{ secrets.GESERVER }} -PgeAccessKey=${{ secrets.GEACCESSKEY }} --info
+              run: ./gradlew -p lucene/analysis/common clean check testRegressions --no-build-cache -Dscan.tag.exp5 -Ptests.seed=deadbeef -PgeServer=${{ secrets.GESERVER }} -PgeAccessKey=${{ secrets.GEACCESSKEY }} --info
