@@ -39,8 +39,8 @@ configure(rootProject) {
   // If we're regenerating the wrapper, skip the check.
   if (!gradle.startParameter.taskNames.contains("wrapper")) {
     def currentGradleVersion = GradleVersion.current()
-    if (currentGradleVersion != GradleVersion.version(expectedGradleVersion)) {
-      throw new GradleException("Gradle ${expectedGradleVersion} is required (hint: use the gradlew script): this gradle is ${currentGradleVersion}")
-    }
+//    if (currentGradleVersion != GradleVersion.version(expectedGradleVersion)) {
+//      throw new GradleException("Gradle ${expectedGradleVersion} is required (hint: use the gradlew script): this gradle is ${currentGradleVersion}")
+//    }
   }
 }
